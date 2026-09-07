@@ -2,19 +2,19 @@
 #
 # dark-2026 -- Xcode installer
 #
-# Copies dark-2026.xccolorscheme into Xcode's theme directory as
-# dark-2026.xccolortheme, which is the extension Xcode looks for.
+# Copies dark-2026.xccolorscheme and light-2026.xccolorscheme into Xcode's
+# theme directory as .xccolortheme files, which is the extension Xcode looks for.
 #
-#   ./install.sh              install (backs up any existing copy)
-#   ./install.sh --uninstall  remove the installed theme
+#   ./install.sh              install both themes (backs up any existing copies)
+#   ./install.sh --uninstall  remove the installed themes
 #   ./install.sh --help       usage
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-SOURCE="$SCRIPT_DIR/dark-2026.xccolorscheme"
 THEME_DIR="${XCODE_THEME_DIR:-$HOME/Library/Developer/Xcode/UserData/FontAndColorThemes}"
-TARGET="$THEME_DIR/dark-2026.xccolortheme"
+
+THEMES=("dark-2026" "light-2026")
 
 bold=''; dim=''; red=''; green=''; yellow=''; reset=''
 if [ -t 1 ]; then
@@ -34,8 +34,8 @@ ${bold}dark-2026 -- Xcode installer${reset}
 Usage: install.sh [options]
 
 Options:
-  -u, --uninstall   Remove the installed theme (and nothing else)
-  -f, --force       Overwrite an existing theme without keeping a backup
+  -u, --uninstall   Remove the installed themes (and nothing else)
+  -f, --force       Overwrite existing themes without keeping backups
   -h, --help        Show this message
 
 Environment:
@@ -62,43 +62,55 @@ if [ "$(uname -s)" != 'Darwin' ]; then
 fi
 
 if [ "$action" = 'uninstall' ]; then
-  if [ -e "$TARGET" ]; then
-    rm -f "$TARGET"
-    ok "Removed $TARGET"
+  found=0
+  for name in "${THEMES[@]}"; do
+    target="$THEME_DIR/$name.xccolortheme"
+    if [ -e "$target" ]; then
+      rm -f "$target"
+      ok "Removed $target"
+      found=1
+    fi
+  done
+  if [ "$found" -eq 1 ]; then
     info "Pick another theme in Xcode ▸ Settings ▸ Themes."
   else
-    info "Nothing to do -- $TARGET is not installed."
+    info "Nothing to do -- no dark-2026 themes are installed."
   fi
   exit 0
 fi
 
-[ -f "$SOURCE" ] || die "theme file not found: $SOURCE"
-
-if command -v plutil >/dev/null 2>&1; then
-  plutil -lint "$SOURCE" >/dev/null 2>&1 || die "$SOURCE is not a valid property list."
-fi
-
 mkdir -p "$THEME_DIR"
 
-if [ -e "$TARGET" ]; then
-  if [ "$force" -eq 1 ]; then
-    rm -f "$TARGET"
-  else
-    backup="$TARGET.$(date +%Y%m%d%H%M%S).bak"
-    mv "$TARGET" "$backup"
-    warn "Existing theme moved to $(basename "$backup")"
-  fi
-fi
+for name in "${THEMES[@]}"; do
+  source="$SCRIPT_DIR/$name.xccolorscheme"
+  target="$THEME_DIR/$name.xccolortheme"
 
-cp "$SOURCE" "$TARGET"
-ok "Installed $TARGET"
+  [ -f "$source" ] || die "theme file not found: $source"
+
+  if command -v plutil >/dev/null 2>&1; then
+    plutil -lint "$source" >/dev/null 2>&1 || die "$source is not a valid property list."
+  fi
+
+  if [ -e "$target" ]; then
+    if [ "$force" -eq 1 ]; then
+      rm -f "$target"
+    else
+      backup="$target.$(date +%Y%m%d%H%M%S).bak"
+      mv "$target" "$backup"
+      warn "Existing theme moved to $(basename "$backup")"
+    fi
+  fi
+
+  cp "$source" "$target"
+  ok "Installed $target"
+done
 
 if pgrep -xq Xcode 2>/dev/null; then
-  warn "Xcode is running -- restart it before the theme shows up in the list."
+  warn "Xcode is running -- restart it before the themes show up in the list."
 fi
 
 cat <<EOF
 
-Next: ${bold}Xcode ▸ Settings ▸ Themes${reset} and pick ${bold}dark-2026${reset}.
-${dim}The theme sets SF Mono 12; change the font in that panel to taste.${reset}
+Next: ${bold}Xcode ▸ Settings ▸ Themes${reset} and pick ${bold}dark-2026${reset} or ${bold}light-2026${reset}.
+${dim}The themes set SF Mono 12; change the font in that panel to taste.${reset}
 EOF

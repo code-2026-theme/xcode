@@ -8,20 +8,19 @@
 
 # dark-2026 — Xcode
 
-A dark theme for [Xcode](https://developer.apple.com/xcode/), ported from VS Code's **Dark
-Modern 2026**: red keywords, purple functions, teal types and light-blue strings on a
-near-black `#121314` canvas.
+Dark and light themes for [Xcode](https://developer.apple.com/xcode/), ported from VS Code's
+**Dark Modern 2026**: red keywords, purple functions, teal types and light-blue strings.
 
-## The dark-2026 family
+## The code-2026 family
 
 | Target | Repository | |
 | --- | --- | --- |
-| Neovim | [dark-2026-theme/nvim](https://github.com/dark-2026-theme/nvim) | colorscheme plugin |
-| Ghostty | [dark-2026-theme/ghostty](https://github.com/dark-2026-theme/ghostty) | terminal theme |
-| kitty | [dark-2026-theme/kitty](https://github.com/dark-2026-theme/kitty) | terminal theme |
-| Xcode | [dark-2026-theme/xcode](https://github.com/dark-2026-theme/xcode) | **this repo** |
-| Obsidian | [dark-2026-theme/obsidian](https://github.com/dark-2026-theme/obsidian) | app theme |
-| Yazi | [dark-2026-theme/yazi](https://github.com/dark-2026-theme/yazi) | file manager |
+| Neovim | [code-2026-theme/nvim](https://github.com/code-2026-theme/nvim) | colorscheme plugin |
+| Ghostty | [code-2026-theme/ghostty](https://github.com/code-2026-theme/ghostty) | terminal theme |
+| kitty | [code-2026-theme/kitty](https://github.com/code-2026-theme/kitty) | terminal theme |
+| Xcode | [code-2026-theme/xcode](https://github.com/code-2026-theme/xcode) | **this repo** |
+| Obsidian | [code-2026-theme/obsidian](https://github.com/code-2026-theme/obsidian) | app theme |
+| Yazi | [code-2026-theme/yazi](https://github.com/code-2026-theme/yazi) | file manager |
 
 Every port shares one palette, so the Xcode editor, `:terminal` inside Neovim and the host
 terminal all render the same colors.
@@ -38,8 +37,8 @@ terminal all render the same colors.
 ./install.sh
 ```
 
-Then **Xcode ▸ Settings ▸ Themes** and pick **dark-2026**. If Xcode was open while you
-installed, restart it first.
+Then **Xcode ▸ Settings ▸ Themes** and pick **dark-2026** or **light-2026**. If Xcode was
+open while you installed, restart it first.
 
 <details>
 <summary><b>Installer options</b></summary>
@@ -119,6 +118,33 @@ selection `#276782`, invisibles `#555555`.
 | Macros | `#48a0c7` | `#Preview`, `#selector` |
 
 The console and rendered markup (playgrounds, Quick Help) are themed from the same palette.
+
+</details>
+
+### Light palette
+
+Background `#FFFFFF`, foreground `#202020`, cursor `#202020`, current line `#EAEAEA`,
+selection `#C2DAF5`, invisibles `#606060`.
+
+<details>
+<summary><b>Light syntax mapping</b></summary>
+
+| Xcode category | Color | |
+| --- | --- | --- |
+| Plain text, Variables | `#202020` | |
+| Comments, Documentation comments | `#6e7781` | italic |
+| Documentation comment keywords | `#0069CC` | `- Parameter`, `- Returns` |
+| Marks | `#606060` | bold |
+| Keywords, Preprocessor statements | `#cf222e` | `func`, `let`, `#if` |
+| Attributes | `#953800` | `@State`, `@objc` |
+| Strings, Characters | `#0a3069` | |
+| Numbers | `#0550ae` | |
+| URLs | `#0069CC` | |
+| Type declarations, Type & class names | `#116329` | project and system |
+| Other declarations, Function & method names | `#8250df` | project and system |
+| Constants | `#0550ae` | project and system |
+| Other class names, `self` / `super` | `#0550ae` | |
+| Macros | `#953800` | `#Preview`, `#selector` |
 
 </details>
 
