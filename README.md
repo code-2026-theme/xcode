@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="dark-2026" width="96" />
+  <img src="assets/logo.svg" alt="code-2026" width="96" />
 </p>
 
 <p align="center">
-  <img src="assets/xcode.png" alt="dark-2026" />
+  <img src="assets/xcode.png" alt="code-2026" />
 </p>
 
-# dark-2026 — Xcode
+# code-2026 — Xcode
 
 Dark and light themes for [Xcode](https://developer.apple.com/xcode/), ported from VS Code's
 **Dark Modern 2026**: red keywords, purple functions, teal types and light-blue strings.
@@ -37,7 +37,7 @@ terminal all render the same colors.
 ./install.sh
 ```
 
-Then **Xcode ▸ Settings ▸ Themes** and pick **dark-2026** or **light-2026**. If Xcode was
+Then **Xcode ▸ Settings ▸ Themes** and pick **code-2026** or **light-2026**. If Xcode was
 open while you installed, restart it first.
 
 <details>
@@ -62,8 +62,8 @@ Xcode only reads themes whose filename ends in `.xccolortheme`, so rename on the
 
 ```sh
 mkdir -p ~/Library/Developer/Xcode/UserData/FontAndColorThemes
-cp dark-2026.xccolorscheme \
-  ~/Library/Developer/Xcode/UserData/FontAndColorThemes/dark-2026.xccolortheme
+cp code-2026.xccolorscheme \
+  ~/Library/Developer/Xcode/UserData/FontAndColorThemes/code-2026.xccolortheme
 ```
 
 That is the only thing `install.sh` does, plus a backup and a plist sanity check.
