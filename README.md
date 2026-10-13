@@ -21,6 +21,7 @@ Dark and light themes for [Xcode](https://developer.apple.com/xcode/), ported fr
 | Xcode | [code-2026-theme/xcode](https://github.com/code-2026-theme/xcode) | **this repo** |
 | Obsidian | [code-2026-theme/obsidian](https://github.com/code-2026-theme/obsidian) | app theme |
 | Yazi | [code-2026-theme/yazi](https://github.com/code-2026-theme/yazi) | file manager |
+| tmux | [code-2026-theme/tmux](https://github.com/code-2026-theme/tmux) | status line |
 
 Every port shares one palette, so the Xcode editor, `:terminal` inside Neovim and the host
 terminal all render the same colors.
